@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">KinoProisk</string>
+    <string name="menu_button">Меню</string>
+    <string name="favor_button">Избранное</string>
+    <string name="later_button">Посмотреть позже</string>
+    <string name="coll_button">Подборки</string>
+    <string name="settings_button">Настройки</string>
+    <string name="disclaimer">Изображения взяты с https://www.movieposters.com</string>
+
+
 </resources>

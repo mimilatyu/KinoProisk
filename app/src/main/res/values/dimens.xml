@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_butt">50dp</dimen>
+    <dimen name="butt_height">500dp</dimen>
+    <dimen name="butt_width">300dp</dimen>
+    <dimen name="updown_height">100dp</dimen>
+    <dimen name="base_margin">16dp</dimen>
+    <dimen name="small_margin">5dp</dimen>
+
+</resources>
