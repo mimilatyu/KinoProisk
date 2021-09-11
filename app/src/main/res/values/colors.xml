@@ -20,7 +20,6 @@
     <!--Pink 700-->
     <color name="accent_700">#C2185B</color>
     <color name="black_trans80">#33000000</color>
-
     <color name="blue_grey">#455A64</color>
     <color name="red">#F44336</color>
     <color name="pink">#E91E63</color>
@@ -40,7 +39,6 @@
     <color name="deep_orange">#FF5722</color>
     <color name="brown">#795548</color>
     <color name="grey">#E0E0E0</color>
-
     <color name="white_70">#B3FFFFFF</color>
     <color name="cyan_50">#E0F7FA</color>
     <color name="amber_50">#FFF8E1</color>
