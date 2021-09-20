@@ -66,12 +66,14 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/disclaimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/margin32"
         android:autoLink="web"
         android:linksClickable="true"
+        android:minHeight="48dp"
         android:text="@string/disclaimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up" />
@@ -102,4 +104,88 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:useDefaultMargins="true"
+        app:layout_constraintTop_toBottomOf="@+id/disclaimer"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layoutAnimation="@anim/layanim">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/aida"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/button_press"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/aida"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/disclaimer" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/philadelphia"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/philadel"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/disclaimer"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/lonely"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/rotate_button">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lonely"
+                tools:ignore="ImageContrastCheck"
+                android:contentDescription="@string/disclaimer"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/morris"
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/phil"
+                tools:ignore="ImageContrastCheck"
+                android:contentDescription="@string/disclaimer"/>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

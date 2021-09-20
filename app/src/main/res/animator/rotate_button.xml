@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <set>
+            <objectAnimator
+                android:duration="50"
+                android:interpolator="@android:anim/anticipate_overshoot_interpolator"
+                android:propertyName="scaleX"
+                android:valueFrom="1"
+                android:valueTo="0.7"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:duration="50"
+                android:interpolator="@android:anim/anticipate_interpolator"
+                android:propertyName="scaleY"
+                android:valueFrom="1"
+                android:valueTo="0.7"
+                android:valueType="floatType"/>
+        </set>
+        <!--Кнопка нажата-->
+    </item>
+
+    <item android:state_pressed="false">
+        <set>
+            <objectAnimator
+                android:duration="200"
+                android:interpolator="@android:interpolator/accelerate_decelerate"
+                android:propertyName="scaleX"
+                android:valueFrom="0.7"
+                android:valueTo="1"
+                android:valueType="floatType"/>
+            <objectAnimator
+                android:duration="200"
+                android:interpolator="@android:interpolator/anticipate_overshoot"
+                android:propertyName="scaleY"
+                android:valueFrom="0.7"
+                android:valueTo="1"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+
+</selector>
