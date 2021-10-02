@@ -10,6 +10,14 @@
     android:background="@drawable/corner_back">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:ignore="MissingConstraints"
+        android:id="@+id/recycler_view"/>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/up"
         android:layout_width="match_parent"
