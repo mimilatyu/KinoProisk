@@ -12,4 +12,5 @@
     <string name="menu_settings_title">Настройки</string>
     <string name="More">More</string>
     <string name="page_title">Поищем</string>
+    <string name="refresh">refresh</string>
 </resources>
