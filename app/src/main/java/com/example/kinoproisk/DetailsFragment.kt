@@ -57,7 +57,7 @@ class DetailsFragment : Fragment() {
 
 
     private fun viewFill(){
-        val film = arguments?.get("film") as Film
+        film = arguments?.get("film") as Film
 
         binding.detailsToolbar.title = film.title
         binding.detailsPoster.setImageResource(film.poster)
