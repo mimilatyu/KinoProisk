@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".DetailsFragment"
-    android:id="@+id/details_ac">
+    tools:context=".DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -50,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        app:borderWidth="0dp"
         android:backgroundTint="@color/colorPrimaryDark"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|right"
@@ -67,17 +67,18 @@
         app:layout_anchorGravity="bottom|center"
         app:srcCompat="@drawable/ic_round_watch_later" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/details_tofav"
+        android:id="@+id/details_fab_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        app:borderWidth="0dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:tint="@android:color/white"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|left"
-        app:srcCompat="@drawable/ic_round_favorite"
-        />
+        app:layout_anchorGravity="left|bottom"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+        app:tint="@android:color/white"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

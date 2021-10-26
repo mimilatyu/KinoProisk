@@ -8,6 +8,7 @@ class FilmViewHolder(private val itemBinding: FilmItemBinding) : RecyclerView.Vi
     private val poster = itemBinding.poster
     private val description = itemBinding.description
 
+
     fun bind(film: Film){
         title.text = film.title
         poster.setImageResource(film.poster)
