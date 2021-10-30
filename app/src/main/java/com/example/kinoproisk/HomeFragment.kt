@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.databinding.FragmentHomeBinding
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -73,8 +75,30 @@ class HomeFragment : Fragment() {
         refresh.setOnClickListener {
             mixing()
         }
+        searchViewLogic()
     }
 
+    private fun searchViewLogic() {
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+        }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val result = filmsDataBase.filter{
+                    it.title.toLowerCase(Locale.getDefault()).contains(newText!!?.toLowerCase(Locale.getDefault()))
+                }
+                filmsAdapter.addItems(result)
+                return true
+            }
+
+        })
+    }
 
 }
 
