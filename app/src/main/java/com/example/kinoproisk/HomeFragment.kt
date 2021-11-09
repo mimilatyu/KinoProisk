@@ -2,6 +2,11 @@ package com.example.kinoproisk
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +15,7 @@ import android.widget.SearchView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.databinding.FragmentHomeBinding
+import com.example.kinoproisk.databinding.MergeHomeScreenContentBinding
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -29,6 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var binding2: MergeHomeScreenContentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +43,29 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding= FragmentHomeBinding.inflate(inflater, container, false)
+        binding2 = MergeHomeScreenContentBinding.inflate(inflater, container, false)
         val view = binding.root
-        return view
+        val view2 = binding2.root
+        return view2
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
+        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+        val customTransition = TransitionSet().apply {
+            duration = 1500
+            addTransition(recyclerSlide)
+            addTransition(searchSlide)
+        }
+        TransitionManager.go(scene, customTransition)
+
+
+
         //нашли RV
-        binding.mainRecycler.apply {
+        binding2.mainRecycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -55,9 +77,12 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
 
+
+
         }
 
         filmsAdapter.addItems(filmsDataBase)
+
 
         //добавил в разметку кнопку чтобы перемешать айтемы (для того, чтобы был повод реализовать DiffUtil),
         //потому что пока не очень понимаю,
@@ -71,7 +96,7 @@ class HomeFragment : Fragment() {
             diffResult.dispatchUpdatesTo(adapter)
         }
 
-        val refresh = binding.refreshBut
+        val refresh = binding2.refreshBut
         refresh.setOnClickListener {
             mixing()
         }
@@ -79,11 +104,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun searchViewLogic() {
-        binding.searchView.setOnClickListener {
-            binding.searchView.isIconified = false
+        binding2.searchView.setOnClickListener {
+            binding2.searchView.isIconified = false
         }
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        binding2.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
