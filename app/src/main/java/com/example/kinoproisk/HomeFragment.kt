@@ -55,15 +55,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
-        val searchSlide = Slide(Gravity.TOP).addTarget(binding.includeHelper.searchView)
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.includeHelper.mainRecycler)
-        val customTransition = TransitionSet().apply {
-            duration = 500
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-        TransitionManager.go(scene, customTransition)
+        //val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
+        //val searchSlide = Slide(Gravity.TOP).addTarget(binding.includeHelper.searchView)
+        //val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.includeHelper.mainRecycler)
+        //val customTransition = TransitionSet().apply {
+        //    duration = 500
+        //    addTransition(recyclerSlide)
+        //    addTransition(searchSlide)
+        //}
+        //TransitionManager.go(scene, customTransition)
 
         //нашли RV
         binding.includeHelper.mainRecycler.apply {
