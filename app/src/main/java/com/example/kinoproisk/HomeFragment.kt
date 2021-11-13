@@ -2,16 +2,24 @@ package com.example.kinoproisk
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.databinding.FragmentHomeBinding
+import java.util.*
 
 class HomeFragment : Fragment() {
 
+    private lateinit var filmsAdapter: FilmListRecyclerAdapter
     val filmsDataBase = listOf(
         Film("Brokeback Mountain", R.drawable.brokeback_mountain, "Ennis and Jack are two shepherds who develop a sexual and emotional relationship. Their relationship becomes complicated when both of them get married to their respective girlfriends."),
         Film("My Own Private Idaho", R.drawable.aida, "Two best friends living on the streets of Portland as hustlers embark on a journey of self discovery and find their relationship stumbling along the way."),
@@ -24,9 +32,16 @@ class HomeFragment : Fragment() {
         Film("Tom at the Farm", R.drawable.tom, "A grieving man meets his lover's family, who were not aware of their son's sexual orientation.")
     )
 
-    private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +55,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
+        val searchSlide = Slide(Gravity.TOP).addTarget(binding.includeHelper.searchView)
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.includeHelper.mainRecycler)
+        val customTransition = TransitionSet().apply {
+            duration = 500
+            addTransition(recyclerSlide)
+            addTransition(searchSlide)
+        }
+        TransitionManager.go(scene, customTransition)
+
         //нашли RV
-        binding.mainRecycler.apply {
+        binding.includeHelper.mainRecycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -57,6 +82,8 @@ class HomeFragment : Fragment() {
 
         filmsAdapter.addItems(filmsDataBase)
 
+
+
         //добавил в разметку кнопку чтобы перемешать айтемы (для того, чтобы был повод реализовать DiffUtil),
         //потому что пока не очень понимаю,
         //как будут добавляться новые фильмы пользователем
@@ -69,12 +96,34 @@ class HomeFragment : Fragment() {
             diffResult.dispatchUpdatesTo(adapter)
         }
 
-        val refresh = binding.refreshBut
+        val refresh = binding.includeHelper.refreshBut
         refresh.setOnClickListener {
             mixing()
         }
+        searchViewLogic()
     }
 
+    private fun searchViewLogic() {
+        binding.includeHelper.searchView.setOnClickListener {
+            binding.includeHelper.searchView.isIconified = false
+        }
+
+        binding.includeHelper.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val result = filmsDataBase.filter{
+                    it.title.toLowerCase(Locale.getDefault()).contains(newText!!?.toLowerCase(Locale.getDefault()))
+                }
+                filmsAdapter.addItems(result)
+                return true
+            }
+
+        })
+    }
 
 }
 
