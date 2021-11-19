@@ -36,12 +36,6 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        retainInstance = true
-    }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,18 +49,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val scene = Scene.getSceneForLayout(binding.homeFragmentRoot, R.layout.merge_home_screen_content, requireContext())
-        val searchSlide = Slide(Gravity.TOP).addTarget(binding.includeHelper.searchView)
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(binding.includeHelper.mainRecycler)
-        val customTransition = TransitionSet().apply {
-            duration = 500
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-        TransitionManager.go(scene, customTransition)
+
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+
 
         //нашли RV
-        binding.includeHelper.mainRecycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
@@ -81,34 +69,15 @@ class HomeFragment : Fragment() {
         }
 
         filmsAdapter.addItems(filmsDataBase)
-
-
-
-        //добавил в разметку кнопку чтобы перемешать айтемы (для того, чтобы был повод реализовать DiffUtil),
-        //потому что пока не очень понимаю,
-        //как будут добавляться новые фильмы пользователем
-        fun mixing() {
-            val oldList = filmsDataBase
-            val newList = filmsDataBase.shuffled()
-            val filmDiff = FilmDiff(oldList, newList)
-            val diffResult = DiffUtil.calculateDiff(filmDiff)
-            val adapter = filmsAdapter.addItems(newList)
-            diffResult.dispatchUpdatesTo(adapter)
-        }
-
-        val refresh = binding.includeHelper.refreshBut
-        refresh.setOnClickListener {
-            mixing()
-        }
         searchViewLogic()
     }
 
     private fun searchViewLogic() {
-        binding.includeHelper.searchView.setOnClickListener {
-            binding.includeHelper.searchView.isIconified = false
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
         }
 
-        binding.includeHelper.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true

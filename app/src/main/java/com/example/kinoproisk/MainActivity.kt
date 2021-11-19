@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.databinding.ActivityMainBinding
@@ -12,12 +13,7 @@ import com.example.kinoproisk.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-
-
     private lateinit var binding: ActivityMainBinding
-    private var backPressTime = 0L
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,54 +43,51 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
     private fun initNavigation(){
-        binding.topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
-        }
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment?: HomeFragment(), tag)
+                    true
+                }
+
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                    val tag = "favorites"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment?: FavoritesFragment(), tag)
                     true
                 }
 
                 R.id.watch_later -> {
-                    Toast.makeText(this, "Посмотреть позже", Toast.LENGTH_SHORT).show()
+                    val tag = "watch_later"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment?: WatchLaterFragment(), tag)
                     true
                 }
 
                 R.id.selections -> {
-                    Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
+                    val tag = "selections"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment?: SelectionsFragment(), tag)
                     true
                 }
+
+
 
                 else -> false
             }
         }
     }
 
-    override fun onBackPressed() {
-        if(supportFragmentManager.backStackEntryCount ==1) {
-            if(backPressTime + TIME_INTERVAL > System.currentTimeMillis()){
-                super.onBackPressed()
-                finish()
-            } else {
-                Toast.makeText(this, "Даблтап для выхода", Toast.LENGTH_SHORT).show()
-            }
-            backPressTime = System.currentTimeMillis()
-        } else {
-            super.onBackPressed()
-        }
-
-
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
-
     companion object {
         const val TIME_INTERVAL = 2000
     }
