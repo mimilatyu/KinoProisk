@@ -2,12 +2,15 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
+
 
 android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 
     compileSdk 30
