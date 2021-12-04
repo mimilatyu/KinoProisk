@@ -1,5 +1,6 @@
 package com.example.kinoproisk
 
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kinoproisk.databinding.FilmItemBinding
@@ -8,6 +9,8 @@ class FilmViewHolder(private val itemBinding: FilmItemBinding) : RecyclerView.Vi
     private val title = itemBinding.title
     private val poster = itemBinding.poster
     private val description = itemBinding.description
+    private val ratingDonut = itemBinding.ratingDonut
+
 
 
     fun bind(film: Film){
@@ -17,5 +20,7 @@ class FilmViewHolder(private val itemBinding: FilmItemBinding) : RecyclerView.Vi
             .centerCrop()
             .into(poster)
         description.text = film.description
+        ratingDonut.setProgress((film.rating*10).toInt())
+
     }
 }
