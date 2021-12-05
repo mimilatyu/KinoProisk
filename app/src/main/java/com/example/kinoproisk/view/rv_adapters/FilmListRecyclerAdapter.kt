@@ -1,9 +1,11 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kinoproisk.view.rv_viewholders.FilmViewHolder
 import com.example.kinoproisk.databinding.FilmItemBinding
+import com.example.kinoproisk.domain.Film
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val items = mutableListOf<Film>()

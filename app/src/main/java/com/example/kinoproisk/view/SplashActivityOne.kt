@@ -1,4 +1,4 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

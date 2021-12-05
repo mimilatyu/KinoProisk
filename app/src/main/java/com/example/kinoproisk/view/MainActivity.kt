@@ -1,16 +1,12 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.ActivityMainBinding
-
-
+import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
 
 

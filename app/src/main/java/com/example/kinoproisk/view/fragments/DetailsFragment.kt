@@ -1,4 +1,4 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.fragments
 
 
 import android.content.Intent
@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.kinoproisk.domain.Film
 
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDetailsBinding
 
 
     override fun onCreateView(
@@ -22,9 +22,8 @@ class DetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

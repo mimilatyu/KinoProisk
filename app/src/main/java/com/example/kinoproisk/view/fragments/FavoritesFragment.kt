@@ -1,4 +1,4 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,22 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kinoproisk.databinding.FragmentDetailsBinding
+import com.example.kinoproisk.view.rv_adapters.FilmListRecyclerAdapter
+import com.example.kinoproisk.view.MainActivity
+import com.example.kinoproisk.view.rv_adapters.TopSpacingItemDecoration
 import com.example.kinoproisk.databinding.FragmentFavoritesBinding
+import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.utils.AnimationHelper
 
 
 class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-    private var _binding : FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
+   private lateinit var binding: FragmentFavoritesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return view
     }
 

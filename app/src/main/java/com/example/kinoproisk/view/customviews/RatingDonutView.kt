@@ -1,9 +1,10 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.customviews
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import com.example.kinoproisk.R
 import kotlin.math.min
 
 class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet?=null): View(context, attributeSet) {

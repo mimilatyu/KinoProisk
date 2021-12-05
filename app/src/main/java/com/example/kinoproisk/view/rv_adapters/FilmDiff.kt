@@ -1,6 +1,7 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.rv_adapters
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.kinoproisk.domain.Film
 
 class FilmDiff(val oldList: List<Film>, val newList: List<Film>): DiffUtil.Callback() {
     override fun getOldListSize(): Int {

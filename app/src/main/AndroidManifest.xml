@@ -4,13 +4,14 @@
     package="com.example.kinoproisk">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivityOne"
+        <activity android:name=".view.SplashActivityOne"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -19,9 +20,9 @@
         </intent-filter>
         </activity>
         <activity
-            android:name=".DetailsFragment"
+            android:name="com.example.kinoproisk.view.fragments.DetailsFragment"
             tools:ignore="Instantiatable" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
 
         </activity>
     </application>

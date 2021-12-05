@@ -1,10 +1,9 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.utils
 
 import android.app.Activity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AccelerateInterpolator
 import java.util.concurrent.Executors
 import kotlin.math.hypot
 import kotlin.math.roundToInt
@@ -16,7 +15,7 @@ object AnimationHelper {
             while(true){
                 if(rootView.isAttachedToWindow){
                     activity.runOnUiThread{
-                        val itemCenter = rootView.width/(menuItems*2)
+                        val itemCenter = rootView.width/(menuItems *2)
                         val step = (itemCenter*2)*(position-1)+itemCenter
 
                         val x: Int = step

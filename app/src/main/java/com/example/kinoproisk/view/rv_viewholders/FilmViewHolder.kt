@@ -1,9 +1,9 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.view.rv_viewholders
 
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kinoproisk.databinding.FilmItemBinding
+import com.example.kinoproisk.domain.Film
 
 class FilmViewHolder(private val itemBinding: FilmItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
     private val title = itemBinding.title

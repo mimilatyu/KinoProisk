@@ -1,7 +1,8 @@
-package com.example.kinoproisk
+package com.example.kinoproisk.domain
 
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
+
 
 @Parcelize
 data class Film(
