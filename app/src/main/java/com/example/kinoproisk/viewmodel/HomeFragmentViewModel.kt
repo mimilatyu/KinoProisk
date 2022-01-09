@@ -5,12 +5,28 @@ import androidx.lifecycle.ViewModel
 import com.example.kinoproisk.App
 import com.example.kinoproisk.domain.Film
 import com.example.kinoproisk.domain.Interactor
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class HomeFragmentViewModel: ViewModel() {
-    val filmsListLiveData = MutableLiveData<List<Film>>()
-    private var interactor: Interactor = App.instance.interactor
+class HomeFragmentViewModel: ViewModel(), KoinComponent {
+    val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
+    private val interactor: Interactor by inject()
+
+
     init{
-        val films = interactor.getFilmsDB()
-        filmsListLiveData.postValue(films)
+        interactor.getFilmsFromApi(1, object : ApiCallback {
+            override fun onSuccess(films: List<Film>) {
+                filmsListLiveData.postValue(films)
+            }
+
+            override fun onFailure(){
+
+            }
+        })
+    }
+
+    interface  ApiCallback {
+        fun onSuccess(films: List<Film>)
+        fun onFailure()
     }
 }
