@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.kinoproisk.R
+import com.example.kinoproisk.data.ApiConstants
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
 import com.example.kinoproisk.domain.Film
 
@@ -59,7 +61,10 @@ class DetailsFragment : Fragment() {
         film = arguments?.get("film") as Film
 
         binding.detailsToolbar.title = film.title
-        binding.detailsPoster.setImageResource(film.poster)
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
         binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(

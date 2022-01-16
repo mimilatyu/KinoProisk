@@ -9,6 +9,7 @@ import com.example.kinoproisk.domain.Film
 import com.example.kinoproisk.view.fragments.*
 
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
