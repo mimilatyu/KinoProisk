@@ -6,16 +6,18 @@
     android:background="@android:color/background_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SplashActivityOne">
+    tools:context=".view.SplashActivityOne"
+    tools:ignore="Overdraw">
 
     <ImageView
         android:layout_width="@dimen/dimen140"
         android:layout_height="@dimen/dimen130"
-        android:id="@+id/imageView"
         android:background="@drawable/ic_logo_kiniproskny"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/todo"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

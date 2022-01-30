@@ -1,11 +1,12 @@
 package com.example.kinoproisk
 
 import android.app.Application
-import com.example.kinoproisk.data.MainRepository
 import com.example.kinoproisk.di.AppComponent
 import com.example.kinoproisk.di.DaggerAppComponent
-import com.example.kinoproisk.domain.Interactor
 
+import com.example.kinoproisk.di.modules.DatabaseModule
+import com.example.kinoproisk.di.modules.DomainModule
+import com.example.kinoproisk.di.modules.RemoteModule
 
 
 class App : Application() {
@@ -15,7 +16,11 @@ class App : Application() {
         super.onCreate()
         instance = this
 
-       dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {

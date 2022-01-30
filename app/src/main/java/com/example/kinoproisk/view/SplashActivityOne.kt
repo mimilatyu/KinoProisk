@@ -1,5 +1,6 @@
 package com.example.kinoproisk.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.example.kinoproisk.databinding.ActivitySplashOneBinding
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivityOne : AppCompatActivity() {
     private lateinit var binding: ActivitySplashOneBinding
     override fun onCreate(savedInstanceState: Bundle?) {

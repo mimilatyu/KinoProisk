@@ -18,6 +18,16 @@
         android:background="@drawable/background_search_view"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/pull_to_refresh"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="@dimen/dimen0"
@@ -30,5 +40,5 @@
         app:layout_constraintTop_toBottomOf="@+id/search_view"
         tools:listitem="@layout/film_item" />
 
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

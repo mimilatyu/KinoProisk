@@ -4,6 +4,7 @@ import com.example.kinoproisk.di.modules.DatabaseModule
 import com.example.kinoproisk.di.modules.DomainModule
 import com.example.kinoproisk.di.modules.RemoteModule
 import com.example.kinoproisk.viewmodel.HomeFragmentViewModel
+import com.example.kinoproisk.viewmodel.SettingsFragmentViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -18,4 +19,5 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
+    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
 }

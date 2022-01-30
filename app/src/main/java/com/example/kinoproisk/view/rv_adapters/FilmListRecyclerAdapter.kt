@@ -1,5 +1,6 @@
 package com.example.kinoproisk.view.rv_adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import com.example.kinoproisk.databinding.FilmItemBinding
 import com.example.kinoproisk.domain.Film
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val items = mutableListOf<Film>()
+    val items = mutableListOf<Film>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemBinding = FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,6 +29,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     override fun getItemCount() = items.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(list: List<Film>){
         items.clear()
         items.addAll(list)
