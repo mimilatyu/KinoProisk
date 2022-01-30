@@ -14,8 +14,13 @@ import retrofit2.Response
 class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
     fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object: Callback<TmdbResults> {
+
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-                callback.onSuccess(convertApiListToDTOList(response.body()?.tmdbFilms))
+                val list = convertApiListToDTOList(response.body()?.tmdbFilms)
+                list.forEach {
+                    repo.putToDb(film = it)
+                }
+                callback.onSuccess(list)
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -24,10 +29,14 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
         })
     }
 
+
+
     fun saveDefaultCategoryToPrefences(category: String) {
         preferences.saveDefaultCategory(category)
     }
 
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
+
+    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
 
 }

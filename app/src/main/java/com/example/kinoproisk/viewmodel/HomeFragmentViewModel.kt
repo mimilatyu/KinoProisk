@@ -10,7 +10,7 @@ import javax.inject.Inject
 class HomeFragmentViewModel : ViewModel() {
     val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
 
-    //Инициализируем интерактор
+
     @Inject
     lateinit var interactor: Interactor
 
@@ -26,7 +26,7 @@ class HomeFragmentViewModel : ViewModel() {
             }
 
             override fun onFailure() {
-
+                filmsListLiveData.postValue(interactor.getFilmsFromDB())
             }
         })
     }
