@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kinoproisk.R
 import com.example.kinoproisk.data.ApiConstants
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
-import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.data.Entity.Film
 
 
 class DetailsFragment : Fragment() {

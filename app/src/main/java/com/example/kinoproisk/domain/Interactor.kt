@@ -1,5 +1,6 @@
 package com.example.kinoproisk.domain
 
+import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.data.Entity.TmdbResults
 import com.example.kinoproisk.data.MainRepository
 import com.example.kinoproisk.data.PreferenceProvider
@@ -8,7 +9,6 @@ import com.example.kinoproisk.utils.Converter.convertApiListToDTOList
 import com.example.kinoproisk.viewmodel.HomeFragmentViewModel
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Converter
 import retrofit2.Response
 
 class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
@@ -18,7 +18,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
                 val list = convertApiListToDTOList(response.body()?.tmdbFilms)
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
                 callback.onSuccess(list)
             }

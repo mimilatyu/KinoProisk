@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.databinding.FragmentHomeBinding
-import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.utils.AnimationHelper
 import com.example.kinoproisk.view.MainActivity
 import com.example.kinoproisk.view.rv_adapters.FilmListRecyclerAdapter

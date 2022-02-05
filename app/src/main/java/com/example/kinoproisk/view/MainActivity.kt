@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.ActivityMainBinding
-import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.view.fragments.*
 
 
