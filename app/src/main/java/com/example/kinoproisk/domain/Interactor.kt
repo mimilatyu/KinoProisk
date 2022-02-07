@@ -1,5 +1,6 @@
 package com.example.kinoproisk.domain
 
+import androidx.lifecycle.LiveData
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.data.Entity.TmdbResults
 import com.example.kinoproisk.data.MainRepository
@@ -20,7 +21,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 list.forEach {
                     repo.putToDb(list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -37,6 +38,6 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
 
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 
 }
