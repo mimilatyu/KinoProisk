@@ -1,10 +1,17 @@
 package com.example.kinoproisk.view.fragments
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +24,9 @@ import com.example.kinoproisk.view.MainActivity
 import com.example.kinoproisk.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.kinoproisk.view.rv_adapters.TopSpacingItemDecoration
 import com.example.kinoproisk.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import okhttp3.Dispatcher
 
 import java.util.*
 
@@ -26,6 +36,7 @@ class HomeFragment : Fragment() {
     }
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
         set(value) {
             if (field == value) return
@@ -54,18 +65,36 @@ class HomeFragment : Fragment() {
         initSearchView()
         initPullToRefresh()
         initRecycler()
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean>{
-            binding.progressBar.isVisible = it
-        })
 
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+
+            scope.launch {
+                for (element in viewModel.showProgressBar) {
+                    launch(Dispatchers.Main) {
+                        binding.progressBar.isVisible = element
+                    }
+                }
+            }
+        }
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
     }
 
     private fun initPullToRefresh() {
         binding.pullToRefresh.setOnRefreshListener {
+
             filmsAdapter.items.clear()
             viewModel.getFilms()
             binding.pullToRefresh.isRefreshing = false
@@ -112,6 +141,10 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
     }
+
+
+
+
 
 }
 

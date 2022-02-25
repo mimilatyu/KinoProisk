@@ -6,11 +6,6 @@ import androidx.lifecycle.ViewModel
 
 
 class MainActivityViewModel: ViewModel() {
-    val errorEvent = SingleLiveEvent<String>()
-
-    fun postError() {
-        errorEvent.postValue("NO CONNECTION")
-    }
 
 
 }
