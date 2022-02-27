@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kinoproisk.view.rv_viewholders.FilmViewHolder
 import com.example.kinoproisk.databinding.FilmItemBinding
-import com.example.kinoproisk.domain.Film
+import com.example.kinoproisk.data.Entity.Film
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val items = mutableListOf<Film>()
