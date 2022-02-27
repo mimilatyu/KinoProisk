@@ -9,6 +9,10 @@ import com.example.kinoproisk.data.TmdbApi
 import com.example.kinoproisk.utils.Converter
 import com.example.kinoproisk.utils.Converter.convertApiListToDTOList
 import com.example.kinoproisk.viewmodel.HomeFragmentViewModel
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -20,29 +24,27 @@ import retrofit2.Response
 
 class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
 
-    val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-    val progressBarState = Channel<Boolean>(Channel.CONFLATED)
+
+    var progressBarState: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     fun getFilmsFromApi(page: Int) {
-        scope.launch {
-            progressBarState.send(true)
-        }
-
+        progressBarState.onNext(true)
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page)
             .enqueue(object: Callback<TmdbResults>{
 
                 override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-                    val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
-                    scope.launch {
+                    val list = convertApiListToDTOList(response.body()?.tmdbFilms)
+                    Completable.fromSingle<List<Film>> {
                         repo.putToDb(list)
-                        progressBarState.send(false)
                     }
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
+                    progressBarState.onNext(false)
+
                 }
 
                 override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
-                    scope.launch {
-                        progressBarState.send(false)
-                    }
+                    progressBarState.onNext(false)
                 }
         })
     }
@@ -55,6 +57,6 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
 
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
-    fun getFilmsFromDB(): Flow<List<Film>> = repo.getAllFromDB()
+    fun getFilmsFromDB(): Observable<List<Film>> = repo.getAllFromDB()
 
 }

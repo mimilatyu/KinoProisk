@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.kinoproisk.App
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.domain.Interactor
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
@@ -14,8 +16,8 @@ import javax.inject.Inject
 class HomeFragmentViewModel : ViewModel() {
    @Inject
    lateinit var interactor: Interactor
-   val filmsListData: Flow<List<Film>>
-   val showProgressBar: Channel<Boolean>
+   val filmsListData: Observable<List<Film>>
+   val showProgressBar: BehaviorSubject<Boolean>
 
    init {
        App.instance.dagger.inject(this)

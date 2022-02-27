@@ -11,7 +11,7 @@
 
     <ImageView
         android:layout_width="@dimen/dimen140"
-        android:layout_height="@dimen/dimen130"
+        android:layout_height="@dimen/dimen100"
         android:background="@drawable/ic_logokiniproisk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
