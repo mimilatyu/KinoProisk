@@ -106,7 +106,8 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="left|bottom"
         app:srcCompat="@drawable/ic_baseline_cloud_download_24"
-        app:tint="@android:color/white"/>
+        app:tint="@android:color/white"
+        android:contentDescription="@string/todo" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
