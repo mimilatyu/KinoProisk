@@ -4,9 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kinoproisk.App
 import com.example.kinoproisk.domain.Interactor
+
 import javax.inject.Inject
 
-class SettingsFragmentViewModel: ViewModel() {
+class SettingsFragmentViewModel : ViewModel() {
     @Inject
     lateinit var interactor: Interactor
     val categoryPropertyLifeData: MutableLiveData<String> = MutableLiveData()
@@ -21,7 +22,7 @@ class SettingsFragmentViewModel: ViewModel() {
     }
 
     fun putCategoryProperty(category: String) {
-        interactor.saveDefaultCategoryToPrefences(category)
+        interactor.saveDefaultCategoryToPreferences(category)
         getCategoryProperty()
     }
 }

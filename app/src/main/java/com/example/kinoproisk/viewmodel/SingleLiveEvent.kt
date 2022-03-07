@@ -18,7 +18,6 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
        //     Timber.w("Multiple observers registered but only one will be notified of changes.")
         }
 
-        // Observe the internal MutableLiveData
         super.observe(owner, Observer<T> { t ->
             if (mPending.compareAndSet(true, false)) {
                 observer.onChanged(t)

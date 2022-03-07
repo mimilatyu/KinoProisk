@@ -3,7 +3,6 @@ package com.example.kinoproisk.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.example.kinoproisk.data.DAO.FilmDao
-import com.example.kinoproisk.data.DatabaseHelper
 import com.example.kinoproisk.data.Entity.AppDataBase
 import com.example.kinoproisk.data.MainRepository
 import dagger.Module

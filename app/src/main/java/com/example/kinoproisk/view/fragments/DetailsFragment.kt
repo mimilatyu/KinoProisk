@@ -56,18 +56,13 @@ class DetailsFragment : Fragment() {
         }
 
         binding.detailsFabShare.setOnClickListener {
-            //Создаем интент
             val intent = Intent()
-            //Укзываем action с которым он запускается
             intent.action = Intent.ACTION_SEND
-            //Кладем данные о нашем фильме
             intent.putExtra(
                 Intent.EXTRA_TEXT,
                 "Check out this film: ${film.title} \n\n ${film.description}"
             )
-            //УКазываем MIME тип, чтобы система знала, какое приложения предложить
             intent.type = "text/plain"
-            //Запускаем наше активити
             startActivity(Intent.createChooser(intent, "Share To:"))
         }
 
@@ -76,8 +71,30 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
+    }
+
+    private fun setFilmsDetails() {
+        film = arguments?.get("film") as Film
+
+        binding.detailsToolbar.title = film.title
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
+        binding.detailsDescription.text = film.description
+
+        binding.detailsFabFavorites.setImageResource(
+            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
+            else R.drawable.ic_baseline_favorite_border_24
+        )
+    }
+
     private fun performAsyncLoadOfPoster() {
-        if(!checkPermission()) {
+
+        if (!checkPermission()) {
             requestPermission()
             return
         }
@@ -106,27 +123,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-
-    private fun setFilmsDetails() {
-
-        film = arguments?.get("film") as Film
-
-
-        binding.detailsToolbar.title = film.title
-
-        Glide.with(this)
-            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
-            .centerCrop()
-            .into(binding.detailsPoster)
-
-        binding.detailsDescription.text = film.description
-
-        binding.detailsFabFavorites.setImageResource(
-            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
-            else R.drawable.ic_baseline_favorite_border_24
-        )
-    }
-
     private fun checkPermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(
             requireContext(),
@@ -144,7 +140,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun saveToGallery(bitmap: Bitmap) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val contentValues = ContentValues().apply {
                 put(MediaStore.Images.Media.TITLE, film.title.handleSingleQuote())
                 put(
@@ -154,10 +150,10 @@ class DetailsFragment : Fragment() {
                 put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
                 put(
                     MediaStore.Images.Media.DATE_ADDED,
-                    System.currentTimeMillis()/1000
+                    System.currentTimeMillis() / 1000
                 )
                 put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Kinoproisk")
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/FilmsSearchApp")
             }
 
             val contentResolver = requireActivity().contentResolver
@@ -165,9 +161,8 @@ class DetailsFragment : Fragment() {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
             )
-
             val outputStream = contentResolver.openOutputStream(uri!!)
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100, outputStream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             outputStream?.close()
         } else {
             @Suppress("DEPRECATION")
