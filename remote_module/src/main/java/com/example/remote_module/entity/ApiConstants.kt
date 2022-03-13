@@ -1,6 +1,5 @@
-package com.example.kinoproisk.data
+package com.example.remote_module.entity
 
-import com.example.kinoproisk.R
 
 object ApiConstants {
     const val BASE_URL = "https://api.themoviedb.org/"

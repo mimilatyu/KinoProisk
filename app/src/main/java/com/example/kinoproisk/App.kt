@@ -3,10 +3,9 @@ package com.example.kinoproisk
 import android.app.Application
 import com.example.kinoproisk.di.AppComponent
 import com.example.kinoproisk.di.DaggerAppComponent
-
 import com.example.kinoproisk.di.modules.DatabaseModule
 import com.example.kinoproisk.di.modules.DomainModule
-import com.example.kinoproisk.di.modules.RemoteModule
+import com.example.remote_module.DaggerRemoteComponent
 
 
 class App : Application() {
@@ -16,11 +15,13 @@ class App : Application() {
         super.onCreate()
         instance = this
 
+        val remoteProvider = DaggerRemoteComponent.create()
         dagger = DaggerAppComponent.builder()
-            .remoteModule(RemoteModule())
+            .remoteProvider(remoteProvider)
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
             .build()
+
     }
 
     companion object {

@@ -3,8 +3,9 @@ package com.example.kinoproisk.di.modules
 import android.content.Context
 import com.example.kinoproisk.data.MainRepository
 import com.example.kinoproisk.data.PreferenceProvider
-import com.example.kinoproisk.data.TmdbApi
+
 import com.example.kinoproisk.domain.Interactor
+import com.example.remote_module.TmdbApi
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

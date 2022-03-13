@@ -1,4 +1,5 @@
-package com.example.kinoproisk.data.Entity
+package com.example.remote_module.entity
+
 
 import com.google.gson.annotations.SerializedName
 

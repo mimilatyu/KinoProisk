@@ -3,10 +3,10 @@ package com.example.kinoproisk.view.rv_viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.kinoproisk.data.ApiConstants
+
 import com.example.kinoproisk.databinding.FilmItemBinding
 import com.example.kinoproisk.data.Entity.Film
-import com.example.kinoproisk.domain.API
+import com.example.remote_module.entity.ApiConstants
 
 class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val filmItemBinding = FilmItemBinding.bind(itemView)
