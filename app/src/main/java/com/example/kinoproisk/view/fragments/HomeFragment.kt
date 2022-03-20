@@ -1,24 +1,17 @@
 package com.example.kinoproisk.view.fragments
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kinoproisk.databinding.FragmentHomeBinding
 import com.example.kinoproisk.data.Entity.Film
+import com.example.kinoproisk.databinding.FragmentHomeBinding
 import com.example.kinoproisk.utils.AnimationHelper
 import com.example.kinoproisk.utils.AutoDisposable
 import com.example.kinoproisk.utils.addTo
@@ -29,14 +22,10 @@ import com.example.kinoproisk.viewmodel.HomeFragmentViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
-import okhttp3.Dispatcher
-
 import java.util.*
 import java.util.concurrent.TimeUnit
-import io.reactivex.rxjava3.kotlin.subscribeBy
 
 
 class HomeFragment : Fragment() {

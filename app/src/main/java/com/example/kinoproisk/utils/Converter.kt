@@ -1,6 +1,6 @@
 package com.example.kinoproisk.utils
 
-import com.example.kinoproisk.data.Entity.TmdbFilm
+import com.example.remote_module.entity.TmdbFilm
 import com.example.kinoproisk.data.Entity.Film
 
 object Converter {

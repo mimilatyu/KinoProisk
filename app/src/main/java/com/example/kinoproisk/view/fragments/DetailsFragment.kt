@@ -19,10 +19,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.kinoproisk.R
-import com.example.kinoproisk.data.ApiConstants
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.viewmodel.DetailsFragmentViewModel
+import com.example.remote_module.entity.ApiConstants
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 
