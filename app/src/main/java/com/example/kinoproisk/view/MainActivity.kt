@@ -1,16 +1,21 @@
 package com.example.kinoproisk.view
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.ActivityMainBinding
 import com.example.kinoproisk.data.Entity.Film
+import com.example.kinoproisk.receivers.ConnectionReceiver
 import com.example.kinoproisk.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,18 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
+        receiver = ConnectionReceiver()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+
+        registerReceiver(receiver, filters)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
