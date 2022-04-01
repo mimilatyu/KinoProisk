@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
 import com.example.kinoproisk.data.Entity.Film
+import com.example.kinoproisk.view.notification.NotificationHelper
 import com.example.kinoproisk.viewmodel.DetailsFragmentViewModel
 import com.example.remote_module.entity.ApiConstants
 import com.google.android.material.snackbar.Snackbar
@@ -64,6 +65,10 @@ class DetailsFragment : Fragment() {
             )
             intent.type = "text/plain"
             startActivity(Intent.createChooser(intent, "Share To:"))
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
 
         binding.detailsFabDownloadWp.setOnClickListener {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navHostFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.kinoproisk.view.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.kinoproisk.view.fragments.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.kinoproisk.view.fragments.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/selectionsFragment"
+        android:name="com.example.kinoproisk.view.fragments.SelectionsFragment"
+        android:label="fragment_selections"
+        tools:layout="@layout/fragment_selections" />
+    <fragment
+        android:id="@+id/watchLaterFragment"
+        android:name="com.example.kinoproisk.view.fragments.WatchLaterFragment"
+        android:label="fragment_watch_later"
+        tools:layout="@layout/fragment_watch_later" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.kinoproisk.view.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navHostFragment"
+        android:name="com.example.kinoproisk.NavHostFragment"
+        android:label="fragment_nav_host"
+        tools:layout="@layout/fragment_nav_host" >
+        <action
+            android:id="@+id/action_navHostFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_navHostFragment_to_selectionsFragment"
+            app:destination="@id/selectionsFragment" />
+        <action
+            android:id="@+id/action_navHostFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_navHostFragment_to_watchLaterFragment"
+            app:destination="@id/watchLaterFragment" />
+    </fragment>
+</navigation>
