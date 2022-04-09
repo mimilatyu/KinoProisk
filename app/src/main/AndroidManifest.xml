@@ -23,6 +23,8 @@
             android:enabled="true"
             android:exported="true"></receiver>
 
+        <receiver android:name=".receivers.ReminderBroadcast"/>
+
         <activity
             android:name=".view.SplashActivityOne"
             android:exported="true">

@@ -34,6 +34,11 @@ class DetailsFragment : Fragment() {
     private val viewModel: DetailsFragmentViewModel by viewModels()
     private val scope = CoroutineScope(Dispatchers.IO)
 
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,7 +73,7 @@ class DetailsFragment : Fragment() {
         }
 
         binding.detailsFabWatchLater.setOnClickListener {
-            NotificationHelper.createNotification(requireContext(), film)
+            NotificationHelper.notificationSet(requireContext(), film)
         }
 
         binding.detailsFabDownloadWp.setOnClickListener {
@@ -182,5 +187,9 @@ class DetailsFragment : Fragment() {
 
     private fun String.handleSingleQuote(): String {
         return this.replace("'", "")
+    }
+
+    private fun addFilmToWatchLater(film: Film) {
+
     }
 }
