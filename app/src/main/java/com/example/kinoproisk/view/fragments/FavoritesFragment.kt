@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.view.rv_adapters.FilmListRecyclerAdapter
-import com.example.kinoproisk.view.MainActivity
 import com.example.kinoproisk.view.rv_adapters.TopSpacingItemDecoration
 import com.example.kinoproisk.databinding.FragmentFavoritesBinding
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.utils.AnimationHelper
+import com.example.kinoproisk.view.MainActivity
 
 
 class FavoritesFragment : Fragment() {

@@ -7,8 +7,9 @@ apply from: "$project.rootDir/versions.gradle"
 android {
     compileSdkVersion 32
 
+
     defaultConfig {
-        applicationId "com.amsdevelops.filmssearch"
+        applicationId "com.example.kinoproisk"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1
@@ -36,6 +37,34 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        basic {
+            dimension "version"
+            applicationIdSuffix ".basic"
+            versionNameSuffix "-basic"
+        }
+        pro {
+            dimension "version"
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+        }
+    }
+    sourceSets {
+        basic {
+            java {
+                srcDirs 'src/basic/java'
+            }
+        }
+        pro {
+            java {
+                srcDirs 'src/pro/java'
+            }
+        }
+    }
+
+
 }
 
 dependencies {
@@ -47,6 +76,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
+    implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
 
     //Tests
     testImplementation 'junit:junit:4.12'

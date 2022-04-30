@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.navigation.NavDeepLink
 import androidx.navigation.NavDeepLinkBuilder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -22,7 +21,6 @@ import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.receivers.ReminderBroadcast
 import com.example.kinoproisk.view.MainActivity
 import com.example.remote_module.entity.ApiConstants
-import io.reactivex.rxjava3.core.Notification
 import java.util.*
 
 object NotificationHelper {

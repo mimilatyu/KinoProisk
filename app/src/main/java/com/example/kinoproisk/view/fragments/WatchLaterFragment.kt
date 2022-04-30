@@ -5,18 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.databinding.FragmentWatchLaterBinding
 import com.example.kinoproisk.utils.AnimationHelper
 import com.example.kinoproisk.utils.AutoDisposable
-import com.example.kinoproisk.utils.addTo
 import com.example.kinoproisk.view.MainActivity
 import com.example.kinoproisk.view.rv_adapters.TopSpacingItemDecoration
 import com.example.kinoproisk.view.rv_adapters.WatchLaterAdapter
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 class WatchLaterFragment : Fragment() {
