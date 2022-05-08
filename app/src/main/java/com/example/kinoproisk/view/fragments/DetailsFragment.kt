@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.FragmentDetailsBinding
 import com.example.kinoproisk.data.Entity.Film
+import com.example.kinoproisk.view.notification.NotificationHelper
 import com.example.kinoproisk.viewmodel.DetailsFragmentViewModel
 import com.example.remote_module.entity.ApiConstants
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +33,11 @@ class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsFragmentViewModel by viewModels()
     private val scope = CoroutineScope(Dispatchers.IO)
+
+
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +70,10 @@ class DetailsFragment : Fragment() {
             )
             intent.type = "text/plain"
             startActivity(Intent.createChooser(intent, "Share To:"))
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.notificationSet(requireContext(), film)
         }
 
         binding.detailsFabDownloadWp.setOnClickListener {
@@ -177,5 +187,9 @@ class DetailsFragment : Fragment() {
 
     private fun String.handleSingleQuote(): String {
         return this.replace("'", "")
+    }
+
+    private fun addFilmToWatchLater(film: Film) {
+
     }
 }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#FFFFFF"
     tools:context=".view.fragments.DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -108,6 +109,19 @@
         app:srcCompat="@drawable/ic_baseline_cloud_download_24"
         app:tint="@android:color/white"
         android:contentDescription="@string/todo" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_fab_watch_later"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:translationX="144dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="left|bottom"
+        app:srcCompat="@drawable/ic_baseline_watch_later_24"
+        app:tint="@android:color/white"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
