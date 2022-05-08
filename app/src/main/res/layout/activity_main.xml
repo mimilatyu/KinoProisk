@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <com.example.kinoproisk.view.customviews.PromoView
+        android:id="@+id/promo_view_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:translationZ="10dp"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/fragment_placeholder"
@@ -24,7 +31,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 

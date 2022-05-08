@@ -5,13 +5,17 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.kinoproisk.App
 import com.example.kinoproisk.R
 import com.example.kinoproisk.databinding.ActivityMainBinding
 import com.example.kinoproisk.data.Entity.Film
 import com.example.kinoproisk.receivers.ConnectionReceiver
 import com.example.kinoproisk.view.fragments.*
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +41,35 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerReceiver(receiver, filters)
+
+        if(!App.instance.isPromoShown) {
+            val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+            val configSettings = FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(0)
+                .build()
+            firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
+            firebaseRemoteConfig.fetch()
+                .addOnCompleteListener{
+                    if(it.isSuccessful) {
+                        firebaseRemoteConfig.activate()
+                        val filmLink = firebaseRemoteConfig.getString("film_link")
+                        if(filmLink.isNotBlank()) {
+                            App.instance.isPromoShown = true
+                            binding.promoViewGroup.apply {
+                                visibility = View.VISIBLE
+                                animate()
+                                    .setDuration(2500)
+                                    .alpha(1f)
+                                    .start()
+                                setLinkForPoster(filmLink)
+                                watchButton.setOnClickListener {
+                                    visibility = View.GONE
+                                }
+                            }
+                        }
+                    }
+                }
+        }
     }
 
     override fun onDestroy() {

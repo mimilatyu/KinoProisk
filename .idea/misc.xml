@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.10885416666666667" />
         <entry key="app/src/main/res/layout/fragment_watch_later.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/merge_home_screen_content.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/merge_promo.xml" value="0.125" />
         <entry key="app/src/main/res/menu/navigation.xml" value="0.24048871015521164" />
         <entry key="app/src/main/res/menu/toolbar.xml" value="0.2296875" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.2296875" />

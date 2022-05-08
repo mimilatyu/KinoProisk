@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply from: "$project.rootDir/versions.gradle"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 32
@@ -77,6 +78,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation 'com.google.firebase:firebase-config:21.1.0'
 
     //Tests
     testImplementation 'junit:junit:4.12'

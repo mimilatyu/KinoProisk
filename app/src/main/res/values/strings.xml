@@ -21,6 +21,8 @@
     <string name="power_connected">Тело заряжается</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="watch_film">Посмотрите фильм:</string>
+    <string name="to_watch">Смотреть</string>
 
 
 </resources>
